@@ -12,35 +12,40 @@ const LoginForm: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Digite seus dados de login</Text>
       <Input
         label=''
         placeholder='Digite seu CPF'
+        placeholderTextColor='#cccccc'
         autoCapitalize='none'
         autoCompleteType='email'
         keyboardType='number-pad'
         keyboardAppearance='default'
         returnKeyType='next'
         returnKeyLabel='next'
-        leftIcon={{ type: 'font-awesome', name: 'user', size: 20}}
+        leftIcon={{ type: 'font-awesome', name: 'user', size: 20, color: '#bfbaef'}}
         style={styles.textInput}
         containerStyle={styles.textInputContainer}
+        inputStyle={styles.textInputText}
         value={cpf}
         onChangeText={setCpf}
-      />
+        />
       <Input
         label=''
         placeholder='Digite sua senha'
-        leftIcon={{ type: 'font-awesome', name: 'lock', size: 24}}
+        placeholderTextColor='#cccccc'
+        leftIcon={{ type: 'font-awesome', name: 'lock', size: 24, color: '#bfbaef'}}
         style={styles.textInput}
         containerStyle={styles.textInputContainer}
+        inputStyle={styles.textInputText}
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
       <Button 
         title="Entrar"
-        containerStyle={styles.button}
+        containerStyle={styles.buttonContainer}
+        buttonStyle={styles.button}
+        titleStyle={styles.buttonTitle}
       />
     </View>
   );
