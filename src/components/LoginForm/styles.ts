@@ -1,9 +1,9 @@
-import React from 'react';
 import { StyleSheet } from 'react-native';
+import { colors } from '../../config/colors';
 
 const styles = StyleSheet.create({
   container:{
-    backgroundColor: '#4e4e4e',
+    backgroundColor: colors.background,
     flex: 1,
     width: '100%',
     alignItems: 'center',
@@ -12,14 +12,14 @@ const styles = StyleSheet.create({
   text: {
     marginBottom: 80,
     fontSize: 24,
-    color: '#eeeeee'
+    color: colors.font
   },
   textInput:{
     marginVertical: 10,
     marginLeft: 8,
   },
   textInputText:{
-    color: '#eee'
+    color: colors.font
   },
   textInputContainer:{
     paddingHorizontal: '10%',
@@ -30,10 +30,10 @@ const styles = StyleSheet.create({
     width: '70%'
   },
   button:{
-    backgroundColor: '#8888ee'
+    backgroundColor: colors.button
   },
   buttonTitle: {
-    color: '#eeeeee'
+    color: colors.font
   }
 });
 
