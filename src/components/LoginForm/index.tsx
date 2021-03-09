@@ -7,7 +7,7 @@ import { Input, Button } from 'react-native-elements';
 import styles from './styles';
 
 interface IPropsLoginForm {
-  onSubmit: () => void;
+  onSubmit: (cpf: string, password: string) => void;
 }
 
 const LoginForm: React.FC<IPropsLoginForm> = (props) => {
@@ -52,7 +52,7 @@ const LoginForm: React.FC<IPropsLoginForm> = (props) => {
         containerStyle={styles.buttonContainer}
         buttonStyle={styles.button}
         titleStyle={styles.buttonTitle}
-        onPress={onSubmit}
+        onPress={() => {onSubmit(cpf, password)}}
       />
     </View>
   );
