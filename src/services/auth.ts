@@ -1,18 +1,26 @@
 import api from './api';
 import { Cache } from './cache';
 
+
 interface ILoginPostResponse {
   auth: boolean;
   token: string;
   type: string;
 }
 
-const login = async (cpf: String, password: String) => {
-  const response: ILoginPostResponse = await api.post('/login', { cpf, password });
+interface ILoginData {
+  auth: boolean;
+  type: string;
+}
 
-  const { token } = response;
+export const login = async (cpf: string, password: string): Promise<ILoginData> => {
+  const { data }: { data: ILoginPostResponse}  = await api.post('/login', { cpf, password });
+
+  const { token } = data;
 
   await Cache.setToken(token);
+  
+  api.defaults.headers['x-access-token'] = token;
 
-  return { response };
+  return data;
 }

@@ -3,7 +3,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
 import Routes from './src/routes';
-import AuthContext from './src/contexts/auth';
+import { AuthProvider } from './src/contexts/auth';
 
 
 export default function App() {
@@ -11,9 +11,9 @@ export default function App() {
     <>
       <StatusBar style="auto" />
       <NavigationContainer>
-        <AuthContext.Provider>
+        <AuthProvider>
           <Routes />
-        </AuthContext.Provider>
+        </AuthProvider>
       </NavigationContainer>
     </>
   );
