@@ -8,7 +8,7 @@ import styles from './styles';
 const Login: React.FC = () => {
   return (
     <View style={styles.container}>
-      <LoginForm onSubmit={() => {}} />
+      <LoginForm onSubmit={( cpf, password ) => {}} />
     </View>
   );
 }
