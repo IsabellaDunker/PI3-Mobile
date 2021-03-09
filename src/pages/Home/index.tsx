@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 
 import styles from './styles';
-import AuthContext from '../../contexts/auth';
+import { useAuth } from '../../contexts/auth';
 
 const Home: React.FC = () => {
-  const {auth} = useContext(AuthContext);
+  const { auth } = useAuth();
 
   return (
     <View style={styles.container}>

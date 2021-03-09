@@ -1,12 +1,12 @@
-import React, { useContext }  from 'react';
+import React  from 'react';
 
-import AuthContext from '../contexts/auth';
+import { useAuth } from '../contexts/auth';
 
 import AppRoutes from './app.routes';
 import AuthRoutes from './auth.routes';
 
 const Routes = () => {
-  const { auth } = React.useContext(AuthContext);
+  const { auth } = useAuth();
 
   return auth ? <AppRoutes /> : <AuthRoutes />;
 }
