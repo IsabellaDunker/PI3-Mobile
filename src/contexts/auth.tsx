@@ -22,6 +22,14 @@ export const AuthProvider: React.FC = ({ children }) => {
     setType(type);
   }
 
+  async function logout(){
+    const response = await authService.logout();
+
+    const { auth, type } = response;
+    setAuth(auth);
+    setType(type);
+  }
+
   return (
     <AuthContext.Provider value={{auth, type, login}}>
       {children}

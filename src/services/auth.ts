@@ -29,7 +29,7 @@ export const login = async (cpf: string, password: string): Promise<ILoginData> 
   return response;
 }
 
-export const logout = async (cpf: string, password: string): Promise<ILoginData> => {
+export const logout = async (): Promise<ILoginData> => {
   const { data }: { data: ILoginPostResponse}  = await api.get('/logout');
 
   const { token } = data;
