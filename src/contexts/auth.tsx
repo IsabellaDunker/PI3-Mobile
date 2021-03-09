@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
 import * as authService from '../services/auth';
 
@@ -15,6 +15,16 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [auth, setAuth] = useState(false);
   const [type, setType] = useState<string | null>(null);
   
+  useEffect(() => {
+    async function renew() {
+      const response = await authService.renew();
+
+      const { auth, type } = response;
+      setAuth(auth);
+      setType(type);
+    }
+  }, []);
+
   async function login(cpf: string, password: string) {
     const response = await authService.login(cpf, password);
 
