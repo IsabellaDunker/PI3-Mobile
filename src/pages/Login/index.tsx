@@ -5,12 +5,12 @@ import LoginForm from '../../components/LoginForm';
 
 import styles from './styles';
 
-const LoginScreen: React.FC = () => {
+const Login: React.FC = () => {
   return (
     <View style={styles.container}>
-      <LoginForm />
+      <LoginForm onSubmit={() => {}} />
     </View>
   );
 }
 
-export default LoginScreen;
+export default Login;

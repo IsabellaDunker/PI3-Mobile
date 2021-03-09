@@ -6,10 +6,16 @@ import { Input, Button } from 'react-native-elements';
 
 import styles from './styles';
 
-const LoginForm: React.FC = () => {
+interface IPropsLoginForm {
+  onSubmit: () => void;
+}
+
+const LoginForm: React.FC<IPropsLoginForm> = (props) => {
+  const { onSubmit } = props;
+
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
-
+  
   return (
     <View style={styles.container}>
       <Input
@@ -46,6 +52,7 @@ const LoginForm: React.FC = () => {
         containerStyle={styles.buttonContainer}
         buttonStyle={styles.button}
         titleStyle={styles.buttonTitle}
+        onPress={onSubmit}
       />
     </View>
   );
