@@ -13,6 +13,10 @@ interface ILoginData {
   type: string;
 }
 
+interface IRenewData {
+  auth: boolean
+}
+
 export const login = async (cpf: string, password: string): Promise<ILoginData> => {
   const { data }: { data: ILoginPostResponse}  = await api.post('/login', { cpf, password });
 
@@ -43,4 +47,12 @@ export const logout = async (): Promise<ILoginData> => {
     type: data.type
   }
   return response;
+}
+
+export const renew = async (token: string): Promise<IRenewData> => {
+  api.defaults.headers['x-access-token'] = token;
+  
+  const { data }: { data: IRenewData } = await api.get('/renew');
+
+  return data;
 }
