@@ -10,19 +10,16 @@ interface ILoginPostResponse {
 
 interface ILoginData {
   auth: boolean;
-  type: string;
-}
-
-interface IRenewData {
-  auth: boolean
+  type: string | null;
 }
 
 export const login = async (cpf: string, password: string): Promise<ILoginData> => {
   const { data }: { data: ILoginPostResponse}  = await api.post('/login', { cpf, password });
 
-  const { token } = data;
+  const { token, type } = data;
 
   await Cache.setToken(token);
+  await Cache.save('type', type);
   
   api.defaults.headers['x-access-token'] = token;
 
@@ -36,9 +33,10 @@ export const login = async (cpf: string, password: string): Promise<ILoginData> 
 export const logout = async (): Promise<ILoginData> => {
   const { data }: { data: ILoginPostResponse}  = await api.get('/logout');
 
-  const { token } = data;
+  const { token, type } = data;
 
   await Cache.setToken(token);
+  await Cache.save('type', type);
   
   api.defaults.headers['x-access-token'] = token;
   
@@ -49,10 +47,17 @@ export const logout = async (): Promise<ILoginData> => {
   return response;
 }
 
-export const renew = async (token: string): Promise<IRenewData> => {
-  api.defaults.headers['x-access-token'] = token;
+export const renew = async (): Promise<ILoginData> => {
+  const token = await Cache.getToken();
   
-  const { data }: { data: IRenewData } = await api.get('/renew');
+  if(token) {
+    api.defaults.headers['x-access-token'] = token;
+    const response = await api.get('/renew');
+    const { auth } = response.data;
+    const type = await Cache.get('type') as string;
 
-  return data;
+    return { auth, type };
+  } else {
+    return { auth: false, type: null }
+  }
 }

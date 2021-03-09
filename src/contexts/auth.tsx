@@ -4,15 +4,16 @@ import * as authService from '../services/auth';
 
 interface IAuthContextData {
   auth: boolean;
-  type: string;
+  type: string | null;
   login(cpf: string, password: string): Promise<void>;
+  logout(): Promise<void>;
 }
 
 const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [auth, setAuth] = useState(false);
-  const [type, setType] = useState('');
+  const [type, setType] = useState<string | null>(null);
   
   async function login(cpf: string, password: string) {
     const response = await authService.login(cpf, password);
@@ -31,7 +32,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{auth, type, login}}>
+    <AuthContext.Provider value={{auth, type, login, logout}}>
       {children}
     </AuthContext.Provider>
   );
