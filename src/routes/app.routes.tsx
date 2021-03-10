@@ -1,22 +1,38 @@
 import * as React from 'react';
+import { Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Home from '../pages/Home';
+import { Button, Icon } from 'react-native-elements';
 
-const AuthStack = createStackNavigator();
+import Home from '../pages/Home';
+import { colors } from '../config/colors';
+
+const App = createStackNavigator();
 
 const AppRoutes = () => {
   return (
-    <AuthStack.Navigator
-      headerMode="none"
+    <App.Navigator
       screenOptions={{
         cardStyle: {
-          backgroundColor: '#f0f0f5'
+          backgroundColor: colors.background
         }
       }}
     >
-      <AuthStack.Screen name="Auth" component={Home} />
-    </AuthStack.Navigator>
+      <App.Screen 
+        name="Auth"
+        component={Home}
+        options={{
+          title: 'Serviços',
+          headerStyle: {
+            backgroundColor: colors.button,
+          },
+          headerTitleStyle:{
+            color: colors.font
+          },
+          headerTitleAlign: 'center',
+        }}
+      />
+    </App.Navigator>
   );
 }
 
