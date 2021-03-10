@@ -5,7 +5,7 @@ import { Button, Icon } from 'react-native-elements';
 import styles from './styles';
 import { useAuth } from '../../contexts/auth';
 import { colors } from '../../config/colors';
-
+import Menu from '../../components/Menu';
 
 const Home: React.FC = ({ navigation }) => {
   const { logout } = useAuth();
@@ -31,9 +31,7 @@ const Home: React.FC = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{color: colors.font}}>
-        Hello
-      </Text>
+      <Menu />
     </View>
   );
 }
