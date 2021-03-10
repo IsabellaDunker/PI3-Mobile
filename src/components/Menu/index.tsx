@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 
 import { Icon, ListItem } from 'react-native-elements';
 import { colors } from '../../config/colors';
@@ -7,10 +8,13 @@ import { colors } from '../../config/colors';
 import styles from './styles';
 
 const Menu: React.FC = () => {
+  const navigation = useNavigation();
+
   const items = [
     {
       title: 'Usuários',
       icon: 'people',
+      page: 'User'
     },
     {
       title: 'Cardápio',
@@ -35,6 +39,7 @@ const Menu: React.FC = () => {
             key={index}
             bottomDivider
             containerStyle={styles.itemContainer}
+            onPress={() => {item.page ? navigation.navigate(item.page) : null}}
           >
             <Icon name={item.icon} color={colors.font}/>
             <ListItem.Content>

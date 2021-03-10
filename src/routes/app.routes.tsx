@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-
-import { Button, Icon } from 'react-native-elements';
 
 import Home from '../pages/Home';
 import { colors } from '../config/colors';
+import UserRoutes from './user.routes';
 
 const App = createStackNavigator();
 
@@ -19,10 +17,24 @@ const AppRoutes = () => {
       }}
     >
       <App.Screen 
-        name="Auth"
+        name="Home"
         component={Home}
         options={{
-          title: 'Serviços',
+          title: 'Menu',
+          headerStyle: {
+            backgroundColor: colors.button,
+          },
+          headerTitleStyle:{
+            color: colors.font
+          },
+          headerTitleAlign: 'center',
+        }}
+      />
+      <App.Screen 
+        name="User"
+        component={UserRoutes}
+        options={{
+          title: 'Usuários',
           headerStyle: {
             backgroundColor: colors.button,
           },
