@@ -1,12 +1,10 @@
-import { userType } from "../enums/userType";
-
 export interface IUserData {
   id: number;
   name: string;
   cpf: string;
   cellphone: string;
-  birth_data: string;
-  type: userType;
+  birth_date: string;
+  type: string;
 }
 
 export interface IUserCreateData {
