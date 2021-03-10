@@ -6,6 +6,7 @@ import BackButton from '../components/Header/BackButton';
 import UserList from '../pages/User/List';
 import UserCreate from '../pages/User/Create';
 import { useNavigation } from '@react-navigation/core';
+import { UserProvider } from '../contexts/user';
 
 const User = createStackNavigator();
 
@@ -22,23 +23,25 @@ const UserRoutes = () => {
 
 
   return (
-    <User.Navigator
-      headerMode="none"
-      screenOptions={{
-        cardStyle: {
-          backgroundColor: colors.background
-        }
-      }}
-    >
-      <User.Screen 
-        name="UserList"
-        component={UserList}
-      />
-      <User.Screen 
-        name="UserCreate"
-        component={UserCreate}
-      />
-    </User.Navigator>
+    <UserProvider>
+      <User.Navigator
+        headerMode="none"
+        screenOptions={{
+          cardStyle: {
+            backgroundColor: colors.background
+          }
+        }}
+      >
+        <User.Screen 
+          name="UserList"
+          component={UserList}
+        />
+        <User.Screen 
+          name="UserCreate"
+          component={UserCreate}
+        />
+      </User.Navigator>      
+    </UserProvider>
   );
 }
 
