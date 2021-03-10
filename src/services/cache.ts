@@ -22,6 +22,16 @@ class Cache {
     const token = await this.get('token');
     return token;
   }
+
+  static async setCpf(cpf: string) {
+    await this.save('cpf', cpf);
+  }
+  
+  static async getCpf() {
+    const cpf = await this.get('cpf');
+    console.log('cpf')
+    return cpf;
+  }
 }
 
 export { Cache };

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import { Formik } from 'formik';
 
 import { Input, Button } from 'react-native-elements';
 
 import styles from './styles';
+import { Cache } from '../../services/cache';
 
 interface IPropsLoginForm {
   onSubmit: (cpf: string, password: string) => void;
@@ -12,6 +13,16 @@ interface IPropsLoginForm {
 
 const LoginForm: React.FC<IPropsLoginForm> = (props) => {
   const { onSubmit } = props;
+
+  useEffect(() => {
+    async function getCache(){
+      const cpf = await Cache.getCpf();
+      if(cpf){
+        setCpf(cpf);
+      }
+    }
+    getCache();
+  }, []);
 
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
