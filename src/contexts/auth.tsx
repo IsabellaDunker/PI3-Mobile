@@ -48,10 +48,10 @@ export const AuthProvider: React.FC = ({ children }) => {
   );
 };
 
-export default AuthContext;
-
 export function useAuth(): IAuthContextData {
   const context = useContext(AuthContext);
 
   return context;
 }
+
+export default AuthContext;
