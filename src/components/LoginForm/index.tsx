@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-import { Formik } from 'formik';
+import { View } from 'react-native';
 
 import { Input, Button } from 'react-native-elements';
 
 import styles from './styles';
 import { Cache } from '../../services/cache';
+import { cpfMask } from '../../utils/masks';
 
 interface IPropsLoginForm {
   onSubmit: (cpf: string, password: string) => void;
@@ -26,7 +26,7 @@ const LoginForm: React.FC<IPropsLoginForm> = (props) => {
 
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
-  
+
   return (
     <View style={styles.container}>
       <Input
@@ -43,8 +43,12 @@ const LoginForm: React.FC<IPropsLoginForm> = (props) => {
         style={styles.textInput}
         containerStyle={styles.textInputContainer}
         inputStyle={styles.textInputText}
-        value={cpf}
-        onChangeText={setCpf}
+        value={cpfMask(cpf)}
+        onChangeText={(new_cpf) => {
+          if(new_cpf.length <= 11){
+            setCpf(new_cpf);
+          }
+        }}
         />
       <Input
         label=''

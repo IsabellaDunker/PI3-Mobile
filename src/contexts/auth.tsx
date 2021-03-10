@@ -28,7 +28,6 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   async function login(cpf: string, password: string) {
     const response = await authService.login(cpf, password);
-
     const { auth, type } = response;
     setAuth(auth);
     setType(type);

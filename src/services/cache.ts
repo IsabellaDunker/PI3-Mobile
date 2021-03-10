@@ -29,7 +29,6 @@ class Cache {
   
   static async getCpf() {
     const cpf = await this.get('cpf');
-    console.log('cpf')
     return cpf;
   }
 }
