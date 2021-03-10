@@ -2,12 +2,16 @@ import * as SecureStore from 'expo-secure-store';
 
 class Cache {
   static async save(key: string, value: any) {
-    await SecureStore.setItemAsync(key, value);
+    if(!value){
+      await SecureStore.setItemAsync(key, '');
+    } else {
+      await SecureStore.setItemAsync(key, JSON.stringify(value));
+    }
   }
 
   static async get(key: string) {
     const value = await SecureStore.getItemAsync(key);
-    return value;
+    return value ? JSON.parse(value) : null;
   }
 
   static async setToken(token: string) {

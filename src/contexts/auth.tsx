@@ -23,6 +23,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       setAuth(auth);
       setType(type);
     }
+    renew();
   }, []);
 
   async function login(cpf: string, password: string) {
@@ -50,7 +51,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
 export default AuthContext;
 
-export function useAuth() {
+export function useAuth(): IAuthContextData {
   const context = useContext(AuthContext);
 
   return context;
