@@ -1,30 +1,22 @@
 import React, { useLayoutEffect } from 'react';
 import { View, Text } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/core';
 
 import styles from './styles';
 import { useAuth } from '../../contexts/auth';
 import { colors } from '../../config/colors';
 import Menu from '../../components/Menu';
+import BackButton from '../../components/Header/BackButton';
 
-const Home: React.FC = ({ navigation }) => {
+const Home: React.FC = () => {
+  const navigation = useNavigation();
   const { logout } = useAuth();
-  
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        <Button
-          icon={
-            <Icon
-              name="chevron-left"
-              size={24}
-              color={colors.font}
-            />
-          }
-          containerStyle={styles.buttonContainer}
-          buttonStyle={styles.button}
-          onPress={logout}
-        />
+        <BackButton onPress={logout} />
       ),
     });
   }, [navigation]);
