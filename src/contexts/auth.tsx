@@ -1,10 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { userType } from '../enums/userType';
 
 import * as authService from '../services/auth';
 
 interface IAuthContextData {
   auth: boolean;
-  type: string | null;
+  type: userType | null;
   login(cpf: string, password: string): Promise<void>;
   logout(): Promise<void>;
 }
