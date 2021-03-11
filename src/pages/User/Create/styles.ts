@@ -5,33 +5,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    justifyContent: 'space-between',
     paddingTop: 12,
-    paddingHorizontal: '5%'
-  },
-  textInput:{
-    marginVertical: 4,
-    marginLeft: 8,
-  },
-  textInputText:{
-    color: colors.font,
-  },
-  labelStyle: {
-    color: colors.font,
-    fontSize: 14,
-    fontWeight: 'bold',
-    alignSelf: 'flex-start'
-  },
-  buttonGroup: {
-    width: '95%',
-    backgroundColor: '#AAA'
-  },
-  buttonContainer:{
-    position: 'absolute',
-    bottom: 30,
-    width: '70%'
+    paddingHorizontal: '5%',
+    paddingBottom: 12
   },
   button:{
     backgroundColor: colors.button
+  },
+  buttonContainer:{
+    width: '80%',
+    marginTop: 10
   },
   buttonTitle: {
     color: colors.font

@@ -1,11 +1,11 @@
 import { useNavigation, useRoute } from '@react-navigation/core';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-import {Button, ButtonGroup, Input} from 'react-native-elements';
+import React, { useLayoutEffect, useState } from 'react';
+import { View } from 'react-native';
+import {Button} from 'react-native-elements';
 import BackButton from '../../../components/Header/BackButton';
+import UserForm from '../../../components/UserForm';
 
 import { IUserData } from '../../../interfaces/user';
-import { brDateMask, usToBrDate } from '../../../utils/masks';
 
 import styles from './styles';
 
@@ -26,19 +26,7 @@ const UserCreate: React.FC = () => {
   const [date, setDate] = useState('');
 
   const [action, setAction] = useState('Criar');
-  const [userTypeSelectedIndex, setUserTypeSelectedIndex] = useState(0);
-  const userTypes = ['Customer', 'Waiter', 'Admin'];
-
-  useEffect(() => {
-    if(user){
-      setName(user.name);
-      setCpf(user.cpf);
-      setCellphone(user.cellphone);
-      setDate(usToBrDate(user.birth_date));
-      setAction('Salvar');
-      setUserTypeSelectedIndex(userTypes.indexOf(user.type));
-    }
-  }, []);
+  
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -50,69 +38,7 @@ const UserCreate: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Input
-        label='Nome'
-        value={name}
-        onChangeText={setName}
-        style={styles.textInput}
-        inputStyle={styles.textInputText}
-        labelStyle={styles.labelStyle}
-      />
-      <Input
-        label='CPF'
-        value={cpf}
-        onChangeText={setCpf}
-        style={styles.textInput}
-
-        inputStyle={styles.textInputText}
-        labelStyle={styles.labelStyle}
-      />
-      <Input
-        label='Celular'
-        value={cellphone}
-        onChangeText={setCellphone}
-        style={styles.textInput}
-        inputStyle={styles.textInputText}
-        labelStyle={styles.labelStyle}
-      />
-      <Input
-        label='Data de nascimento'
-        value={brDateMask(date)}
-        onChangeText={(newDate) => {
-          if(newDate.length <= 8)
-            setDate(newDate);
-          }
-        }
-        style={styles.textInput}
-        inputStyle={styles.textInputText}
-        labelStyle={styles.labelStyle}
-      />
-      {
-        (!user) && userTypeSelectedIndex != 0 ? (
-          <Input
-            disabled={userTypeSelectedIndex == 0}
-            label='Senha'
-            value={password}
-            onChangeText={setPassword}
-            style={styles.textInput}
-            inputStyle={styles.textInputText}
-            labelStyle={styles.labelStyle}
-          />
-        ) : (
-          null
-        )
-      }
-      
-      <Text style={{...styles.labelStyle, marginLeft: '2.5%'}}>Tipo</Text>
-      <ButtonGroup 
-        onPress={setUserTypeSelectedIndex}
-        selectedIndex={userTypeSelectedIndex}
-        buttons={userTypes}
-        containerStyle={styles.buttonGroup}
-        selectedButtonStyle={styles.button}
-        textStyle={styles.buttonTitle}
-      />
-
+      <UserForm />
       <Button 
         title={action}
         containerStyle={styles.buttonContainer}
