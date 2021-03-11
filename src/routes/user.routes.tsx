@@ -15,17 +15,13 @@ const UserRoutes = () => {
   
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: () => (
-        <BackButton onPress={() => {navigation.goBack()}} />
-      ),
+      headerShown: false,
     });
   }, [navigation]);
-
 
   return (
     <UserProvider>
       <User.Navigator
-        headerMode="none"
         screenOptions={{
           cardStyle: {
             backgroundColor: colors.background
@@ -35,10 +31,30 @@ const UserRoutes = () => {
         <User.Screen 
           name="UserList"
           component={UserList}
+          options={{
+            title: 'Usuários',
+            headerStyle: {
+              backgroundColor: colors.button,
+            },
+            headerTitleStyle:{
+              color: colors.font
+            },
+            headerTitleAlign: 'center',
+          }}
         />
         <User.Screen 
           name="UserCreate"
           component={UserCreate}
+          options={{
+            title: 'Usuários',
+            headerStyle: {
+              backgroundColor: colors.button,
+            },
+            headerTitleStyle:{
+              color: colors.font
+            },
+            headerTitleAlign: 'center',
+          }}
         />
       </User.Navigator>      
     </UserProvider>

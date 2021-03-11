@@ -1,7 +1,8 @@
 import { useNavigation, useRoute } from '@react-navigation/core';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { View, Text } from 'react-native';
 import {Button, ButtonGroup, Input} from 'react-native-elements';
+import BackButton from '../../../components/Header/BackButton';
 
 import { IUserData } from '../../../interfaces/user';
 import { brDateMask, usToBrDate } from '../../../utils/masks';
@@ -38,6 +39,14 @@ const UserCreate: React.FC = () => {
       setUserTypeSelectedIndex(userTypes.indexOf(user.type));
     }
   }, []);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <BackButton onPress={() => {navigation.goBack()}} />
+      ),
+    });
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
@@ -79,7 +88,7 @@ const UserCreate: React.FC = () => {
         labelStyle={styles.labelStyle}
       />
       {
-        !user ? (
+        (!user) && userTypeSelectedIndex != 0 ? (
           <Input
             disabled={userTypeSelectedIndex == 0}
             label='Senha'
