@@ -29,7 +29,12 @@ const styles = StyleSheet.create({
   },
   buttonTitle: {
     color: colors.font
-  }
+  },
+  buttonContainer:{
+    width: '80%',
+    marginTop: 10,
+    alignSelf: 'center'
+  },
 })
 
 export default styles;

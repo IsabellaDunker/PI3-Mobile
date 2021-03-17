@@ -17,16 +17,7 @@ const UserCreate: React.FC = () => {
   const route = useRoute();
   const navigation = useNavigation();
 
-  const { user } = route.params as Params;
-
-  const [name, setName] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [cellphone, setCellphone] = useState('');
-  const [password, setPassword] = useState('');
-  const [date, setDate] = useState('');
-
-  const [action, setAction] = useState('Criar');
-  
+  const { user } = route.params as Params;  
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -35,17 +26,10 @@ const UserCreate: React.FC = () => {
       ),
     });
   }, [navigation]);
-
+  
   return (
     <View style={styles.container}>
-      <UserForm />
-      <Button 
-        title={action}
-        containerStyle={styles.buttonContainer}
-        buttonStyle={styles.button}
-        titleStyle={styles.buttonTitle}
-        onPress={() => {}}
-      />
+      <UserForm user={user} action={user ? 'Salvar' : 'Criar'}/>
     </View>
   );
 }

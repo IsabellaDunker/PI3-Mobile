@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { IUserData } from '../interfaces/user';
+import { IUserData, IUserFormSubmitData } from '../interfaces/user';
 
 import * as userService from '../services/user';
+import { noBarsToUsDate } from '../utils/masks';
 
 interface IUserContextData {
   users: IUserData[];
-  updateUsers(): void;
+  getUsers(): void;
+  saveForm(user: IUserFormSubmitData): void;
 }
 
 const UserContext = createContext<IUserContextData>({} as IUserContextData);
@@ -13,17 +15,48 @@ const UserContext = createContext<IUserContextData>({} as IUserContextData);
 export const UserProvider: React.FC = ({ children }) => {
   const [ users, setUsers ] = useState<IUserData[]>([]);
 
-  async function updateUsers() {
+  async function getUsers() {
     const response = await userService.get_all();
     setUsers(response);
   }
 
+  async function saveForm(user: IUserFormSubmitData) {
+    if(user.id) {
+      const updatedUserData = {
+        id: user.id,
+        name: user.name,
+        birth_date: noBarsToUsDate(user.birth_date),
+        cellphone: user.cellphone,
+        cpf: user.cpf,
+        type: user.type
+      }
+      await userService.update(updatedUserData as IUserData);
+
+      getUsers();
+
+    } else {
+      
+      const newUserData = {
+        name: user.name,
+        birth_date: noBarsToUsDate(user.birth_date),
+        cellphone: user.cellphone,
+        cpf: user.cpf,
+        type: user.type,
+        password: user.type !== 'Customer' ? user.password : '',
+      }
+
+      await userService.create(newUserData);
+
+      getUsers();
+    }
+  }
+
   useEffect(() => {
-    updateUsers();
+    getUsers();
   }, []);
 
   return (
-    <UserContext.Provider value={{users, updateUsers}}>
+    <UserContext.Provider value={{users, getUsers, saveForm}}>
       {children}
     </UserContext.Provider>
   );
