@@ -1,7 +1,5 @@
-import { IUserCreateData, IUserData } from '../interfaces/user';
+import { IUserServiceCreateData, IUserData } from '../interfaces/user';
 import api from './api';
-
-
 
 export const get_all = async () => {
   const response = await api.get('/users');
@@ -15,7 +13,7 @@ export const get_one = async (id: number) => {
   return response.data as IUserData;
 }
 
-export const create = async (user: IUserCreateData) => {
+export const create = async (user: IUserServiceCreateData) => {
   const response = await api.post('/users', user);
 
   return response.data as IUserData;
