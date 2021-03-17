@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useLayoutEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import {Button, ListItem} from 'react-native-elements';
-import BackButton from '../../../components/Header/BackButton';
+import HeaderButton from '../../../components/Header/Button';
 import { colors } from '../../../config/colors';
 import { useUser } from '../../../contexts/user';
 import { cpfMask } from '../../../utils/masks';
@@ -17,8 +17,11 @@ const UserList: React.FC = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        <BackButton onPress={() => {navigation.goBack()}} />
+        <HeaderButton onPress={() => {navigation.goBack()}} iconName="chevron-left"/>
       ),
+      headerRight: () => (
+        <HeaderButton onPress={() => {navigation.navigate('UserCreate', {user: null})}} iconName="add"/>
+      )
     });
   }, [navigation]);
 

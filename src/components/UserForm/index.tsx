@@ -11,10 +11,11 @@ import { cpfMask, noBarsDate, noBarsToBrDate } from '../../utils/masks';
 interface IProps {
   user: IUserData | null;
   action: string;
+  afterSubmit(): void;
 }
 
 const UserForm: React.FC<IProps> = (props) => {
-  const { user, action } = props;
+  const { user, action, afterSubmit } = props;
   const { saveForm } = useUser();
 
   const [userTypeSelectedIndex, setUserTypeSelectedIndex] = useState(0);
@@ -37,10 +38,11 @@ const UserForm: React.FC<IProps> = (props) => {
           birth_date: noBarsDate(user?.birth_date || '') || '',
           password: '',
         }}
-        onSubmit={(values) => {
+        onSubmit={async (values) => {
           const formData = {...values, type: userTypes[userTypeSelectedIndex]} as IUserFormSubmitData
-          saveForm(formData);
           Keyboard.dismiss();
+          await saveForm(formData);
+          afterSubmit();
         }}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (

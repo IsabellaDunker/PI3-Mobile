@@ -18,8 +18,6 @@ export const get_one = async (id: number) => {
 export const create = async (user: IUserCreateData) => {
   const response = await api.post('/users', user);
 
-  delete response.data['password'];
-
   return response.data as IUserData;
 }
 

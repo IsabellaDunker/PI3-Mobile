@@ -4,19 +4,20 @@ import { colors } from '../../../config/colors';
 
 import styles from './styles';
 
-interface IBackButtonProps {
+interface IHeaderButtonProps {
   onPress(): void;
+  iconName: string;
 }
 
-const BackButton: React.FC<IBackButtonProps> = (props) => {
-  const { onPress } = props;
+const HeaderButton: React.FC<IHeaderButtonProps> = (props) => {
+  const { onPress, iconName } = props;
 
   return (
     <>
       <Button
           icon={
             <Icon
-              name="chevron-left"
+              name={iconName}
               size={24}
               color={colors.font}
             />
@@ -29,4 +30,4 @@ const BackButton: React.FC<IBackButtonProps> = (props) => {
   );
 }
 
-export default BackButton;
+export default HeaderButton;

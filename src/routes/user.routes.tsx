@@ -2,7 +2,6 @@ import React, { useLayoutEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { colors } from '../config/colors';
 
-import BackButton from '../components/Header/BackButton';
 import UserList from '../pages/User/List';
 import UserCreate from '../pages/User/Create';
 import { useNavigation } from '@react-navigation/core';

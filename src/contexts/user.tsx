@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { IUserData, IUserFormSubmitData } from '../interfaces/user';
 
 import * as userService from '../services/user';
-import { noBarsToUsDate } from '../utils/masks';
+import { brToUsDate, noBarsToUsDate, unmaskCpf } from '../utils/masks';
 
 interface IUserContextData {
   users: IUserData[];
@@ -35,18 +35,16 @@ export const UserProvider: React.FC = ({ children }) => {
       getUsers();
 
     } else {
-      
       const newUserData = {
         name: user.name,
-        birth_date: noBarsToUsDate(user.birth_date),
+        birth_date: brToUsDate(user.birth_date),
         cellphone: user.cellphone,
-        cpf: user.cpf,
+        cpf: unmaskCpf(user.cpf),
         type: user.type,
-        password: user.type !== 'Customer' ? user.password : '',
+        password: user.type !== 'Customer' ? user.password : ''
       }
 
       await userService.create(newUserData);
-
       getUsers();
     }
   }

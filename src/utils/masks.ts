@@ -7,6 +7,13 @@ export const cpfMask = (value: string) => {
     .replace(/(-\d{2})\d+?$/, '$1');
 }
 
+export const unmaskCpf = (value: string) => {
+  return value
+    .replace('.', '')
+    .replace('.', '')
+    .replace('-', '')
+} 
+
 export const brDateMask = (value: string) => {
   return value
     .replace(/\D/g, '')
@@ -20,6 +27,14 @@ export const usToBrDate = (value: string) => {
   const day = value.substring(8, 10);
 
   return [day, month, year].join('/');
+}
+
+export const brToUsDate = (value: string) => {
+  const day = value.substring(0, 2);
+  const month = value.substring(3, 5);
+  const year = value.substring(6, 10);
+
+  return [month, day, year].join('-');
 }
 
 export const noBarsDate = (value: string) => {

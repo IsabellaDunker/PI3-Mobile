@@ -1,8 +1,7 @@
 import { useNavigation, useRoute } from '@react-navigation/core';
 import React, { useLayoutEffect, useState } from 'react';
 import { View } from 'react-native';
-import {Button} from 'react-native-elements';
-import BackButton from '../../../components/Header/BackButton';
+import HeaderButton from '../../../components/Header/Button';
 import UserForm from '../../../components/UserForm';
 
 import { IUserData } from '../../../interfaces/user';
@@ -22,14 +21,14 @@ const UserCreate: React.FC = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        <BackButton onPress={() => {navigation.goBack()}} />
-      ),
+        <HeaderButton onPress={() => {navigation.goBack()}} iconName="chevron-left"/>
+      )
     });
   }, [navigation]);
   
   return (
     <View style={styles.container}>
-      <UserForm user={user} action={user ? 'Salvar' : 'Criar'}/>
+      <UserForm user={user} action={user ? 'Salvar' : 'Criar'} afterSubmit={() => {navigation.goBack()}}/>
     </View>
   );
 }

@@ -7,7 +7,7 @@ import styles from './styles';
 import { useAuth } from '../../contexts/auth';
 import { colors } from '../../config/colors';
 import Menu from '../../components/Menu';
-import BackButton from '../../components/Header/BackButton';
+import HeaderButton from '../../components/Header/Button';
 
 const Home: React.FC = () => {
   const navigation = useNavigation();
@@ -16,7 +16,7 @@ const Home: React.FC = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        <BackButton onPress={logout} />
+        <HeaderButton onPress={logout} iconName="chevron-left"/>
       ),
     });
   }, [navigation]);

@@ -11,7 +11,7 @@ export interface IUserServiceCreateData {
   name: string;
   cpf: string;
   cellphone: string;
-  birth_data: string;
+  birth_date: string;
   type: string;
   password: string;
 }
