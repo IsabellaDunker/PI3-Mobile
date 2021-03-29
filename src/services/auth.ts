@@ -1,4 +1,3 @@
-import { userType } from '../enums/userType';
 import api from './api';
 import { Cache } from './cache';
 
@@ -6,12 +5,12 @@ import { Cache } from './cache';
 interface ILoginPostResponse {
   auth: boolean;
   token: string;
-  type: userType;
+  type: string;
 }
 
 interface ILoginData {
   auth: boolean;
-  type: userType | null;
+  type: string | null;
 }
 
 export const login = async (cpf: string, password: string): Promise<ILoginData> => {
