@@ -18,7 +18,8 @@ const Menu: React.FC = () => {
     },
     {
       title: 'Cardápio',
-      icon: 'fastfood'
+      icon: 'fastfood',
+      page: 'Product'
     },
     {
       title: 'Comandas',
