@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { userType } from '../enums/userType';
 
 import * as authService from '../services/auth';
+import { unmaskCpf } from '../utils/masks';
 
 interface IAuthContextData {
   auth: boolean;
-  type: userType | null;
+  type: string | null;
   login(cpf: string, password: string): Promise<void>;
   logout(): Promise<void>;
 }
@@ -28,7 +28,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   async function login(cpf: string, password: string) {
-    const response = await authService.login(cpf, password);
+    const response = await authService.login(unmaskCpf(cpf), password);
     const { auth, type } = response;
     setAuth(auth);
     setType(type);

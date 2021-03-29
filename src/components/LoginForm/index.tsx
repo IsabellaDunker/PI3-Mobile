@@ -45,7 +45,7 @@ const LoginForm: React.FC<IPropsLoginForm> = (props) => {
         inputStyle={styles.textInputText}
         value={cpfMask(cpf)}
         onChangeText={(new_cpf) => {
-          if(new_cpf.length <= 11){
+          if(new_cpf.length <= 14){
             setCpf(new_cpf);
           }
         }}
