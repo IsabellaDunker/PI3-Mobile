@@ -5,6 +5,7 @@ import { colors } from '../config/colors';
 import ProductList from '../pages/Product/List';
 import { useNavigation } from '@react-navigation/core';
 import { ProductProvider } from '../contexts/product';
+import ProductDetails from '../pages/Product/Details';
 
 const Product = createStackNavigator();
 
@@ -31,6 +32,20 @@ const ProductRoutes = () => {
           component={ProductList}
           options={{
             title: 'Cardápio',
+            headerStyle: {
+              backgroundColor: colors.button,
+            },
+            headerTitleStyle:{
+              color: colors.font
+            },
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Product.Screen
+          name="ProductDetails"
+          component={ ProductDetails }
+          options={{
+            title: 'Detalhes do produto',
             headerStyle: {
               backgroundColor: colors.button,
             },

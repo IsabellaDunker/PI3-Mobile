@@ -29,7 +29,9 @@ const ProductList: React.FC = () => {
             key={index}
             bottomDivider
             containerStyle={styles.itemContainer}
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate('ProductDetails', { product })
+            }}
           >
             <ListItem.Content>
               <ListItem.Title style={styles.itemFont}>{product.name}</ListItem.Title>
