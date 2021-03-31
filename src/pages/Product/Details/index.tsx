@@ -73,7 +73,7 @@ const ProductDetails: React.FC = () => {
             size: 15,
             color: colors.font
           }}
-          title={`Adicionar  R$${product.price * units} `}
+          title={`Adicionar  R$${(product.price * units).toFixed(2)} `}
           buttonStyle={styles.addButton}
           titleStyle={styles.buttonText}
         />
