@@ -1,10 +1,16 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
-// import { Container } from './styles';
+import styles from './styles';
 
 const TabDetails: React.FC = () => {
-  return <View />;
+  return (
+    <View style={styles.container}>
+      <Text>
+        No orders yet
+      </Text>
+    </View>
+  );
 }
 
 export default TabDetails;
