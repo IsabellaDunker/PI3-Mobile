@@ -13,6 +13,7 @@ export const TabProvider: React.FC = ({ children }) => {
 
   async function getTabs(){
     const response = await tabService.get_all();
+    console.log(response);
     setTabs(response);
   }
 
