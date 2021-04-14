@@ -63,7 +63,7 @@ const AppRoutes = () => {
       />
       <App.Screen 
         name="Tab"
-        component={ProductRoutes}
+        component={TabRoutes}
         options={{
           title: 'Comandas',
           headerStyle: {
