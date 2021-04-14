@@ -4,6 +4,7 @@ import * as tabService from '../services/tab';
 
 interface ITabContextData {
   tabs: ITabData[];
+  getTabs(): Promise<void>;
 }
 
 const TabContext = createContext<ITabContextData>({} as ITabContextData);
@@ -13,7 +14,6 @@ export const TabProvider: React.FC = ({ children }) => {
 
   async function getTabs(){
     const response = await tabService.get_all();
-    console.log(response);
     setTabs(response);
   }
 
@@ -22,7 +22,7 @@ export const TabProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <TabContext.Provider value={{tabs}}>
+    <TabContext.Provider value={{tabs, getTabs}}>
       {children}
     </TabContext.Provider>
   );

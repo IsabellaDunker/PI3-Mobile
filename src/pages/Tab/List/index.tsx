@@ -1,20 +1,78 @@
 import { useNavigation } from '@react-navigation/core';
-import React from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-import { Icon, ListItem } from 'react-native-elements';
+import { Icon, ListItem, Overlay } from 'react-native-elements';
+import HeaderButton from '../../../components/Header/Button';
 import { colors } from '../../../config/colors';
 import { useTab } from '../../../contexts/tab';
+import { IUserData } from '../../../interfaces/user';
 import { cpfMask } from '../../../utils/masks';
-
+import * as userService from '../../../services/user';
+import * as tabService from '../../../services/tab';
 import styles from './styles';
 
 const TabList: React.FC = () => {
-  const { tabs } = useTab();
+  const { tabs, getTabs } = useTab();
+  
+  const [ users, setUsers ] = useState<IUserData[]>([]);
+  const [overlay, setOverlay] = useState(false);
 
   const navigation = useNavigation();
 
+  const getUsers = async () => {
+    const response = await userService.get_all();
+    setUsers(response);
+  }
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <HeaderButton onPress={() => {navigation.goBack()}} iconName="chevron-left"/>
+      ),
+      headerRight: () => (
+        <HeaderButton onPress={() => {
+          setOverlay(!overlay);
+        }} iconName="add"/>
+      )
+    });
+  }, [navigation]);
+
   return (
     <View style={styles.container}>
+      <Overlay
+      fullScreen
+      overlayStyle={{...styles.container, height: '90%', backgroundColor: colors.background}} 
+      isVisible={overlay} 
+      onBackdropPress={() => {setOverlay(!overlay)}}>
+        <>
+          {
+            users.map((user, index) => {
+              return (
+                <ListItem 
+                  key={index}
+                  bottomDivider
+                  containerStyle={{ ...styles.itemContainer}}
+                  onPress={async () => {
+                    await tabService.create({ user_id: user.id });
+                    setOverlay(!overlay);
+                    getTabs();
+                  }}
+                > 
+                  <ListItem.Content>
+                    <ListItem.Title style={styles.itemFont}>{user.name}</ListItem.Title>
+                    <ListItem.Subtitle style={styles.itemFont}>{cpfMask(user.cpf)}</ListItem.Subtitle>
+                  </ListItem.Content>
+                  <ListItem.Chevron color={colors.font} />
+                </ListItem>
+              )
+            })
+          }
+        </>
+      </Overlay>
       {
         tabs.map((tab, index) => (
           <ListItem 

@@ -7,7 +7,7 @@ import { brToUsDate, noBarsToUsDate, unmaskCpf } from '../utils/masks';
 interface IUserContextData {
   users: IUserData[];
   getUsers(): void;
-  saveForm(user: IUserFormSubmitData): void;
+  saveForm(user: IUserFormSubmitData): Promise<void>;
 }
 
 const UserContext = createContext<IUserContextData>({} as IUserContextData);
