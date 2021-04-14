@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/core';
 import React from 'react';
 import { View, Text } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { Icon, ListItem } from 'react-native-elements';
 import { colors } from '../../../config/colors';
 import { useTab } from '../../../contexts/tab';
 import { cpfMask } from '../../../utils/masks';
@@ -24,7 +24,13 @@ const TabList: React.FC = () => {
             onPress={() => {
               navigation.navigate('TabDetails', {tab})
             }}
-          >
+          > 
+            <View>
+              <Icon
+                name='shopping-bag'
+                color={tab.is_open ? '#0F0' : '#F00'}
+              />
+            </View>
             <ListItem.Content>
               <ListItem.Title style={styles.itemFont}>{tab.user.name}</ListItem.Title>
               <ListItem.Subtitle style={styles.itemFont}>{cpfMask(tab.user.cpf)}</ListItem.Subtitle>
