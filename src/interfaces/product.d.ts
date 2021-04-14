@@ -1,6 +1,6 @@
 import { IEnvironmentData } from './environment.d';
 
-interface IProductData {
+export interface IProductData {
   id: number;
   name: string;
   is_available: boolean;
