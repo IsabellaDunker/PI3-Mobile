@@ -6,6 +6,7 @@ import { colors } from '../config/colors';
 
 import UserRoutes from './user.routes';
 import ProductRoutes from './product.routes';
+import TabRoutes from './tab.routes';
 
 const App = createStackNavigator();
 
@@ -51,6 +52,20 @@ const AppRoutes = () => {
         component={ProductRoutes}
         options={{
           title: 'Cardápio',
+          headerStyle: {
+            backgroundColor: colors.button,
+          },
+          headerTitleStyle:{
+            color: colors.font
+          },
+          headerTitleAlign: 'center',
+        }}
+      />
+      <App.Screen 
+        name="Tab"
+        component={ProductRoutes}
+        options={{
+          title: 'Comandas',
           headerStyle: {
             backgroundColor: colors.button,
           },
