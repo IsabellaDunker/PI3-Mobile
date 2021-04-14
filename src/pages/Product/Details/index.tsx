@@ -28,10 +28,6 @@ const ProductDetails: React.FC = () => {
     });
   }, [navigation]);
 
-  useEffect(() => {
-    console.log(product);
-  }, []);
-
   return (
     <View style={styles.container}>
       <Tile 
