@@ -4,7 +4,7 @@ export interface ITabData {
   user_id: number;
   is_open: boolean;
   orders: Object[];
-  user: IUserData[];
+  user: IUserData;
 }
 
 export interface ITabCreateData {
