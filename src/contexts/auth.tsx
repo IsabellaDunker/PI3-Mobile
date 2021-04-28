@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { IUserData } from '../interfaces/user';
 
 import * as authService from '../services/auth';
+import { Cache } from '../services/cache';
 import { unmaskCpf } from '../utils/masks';
 
 interface IAuthContextData {
   auth: boolean;
-  type: string | null;
+  user: IUserData | null;
   login(cpf: string, password: string): Promise<void>;
   logout(): Promise<void>;
 }
@@ -14,36 +16,38 @@ const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [auth, setAuth] = useState(false);
-  const [type, setType] = useState<string | null>(null);
+  const [user, setUser] = useState<IUserData | null>(null);
   
   useEffect(() => {
     async function renew() {
       const response = await authService.renew();
 
-      const { auth, type } = response;
+      const cachedUser = await Cache.getUser();
+
+      const { auth } = response;
       setAuth(auth);
-      setType(type);
+      setUser(cachedUser);
     }
     renew();
   }, []);
 
   async function login(cpf: string, password: string) {
     const response = await authService.login(unmaskCpf(cpf), password);
-    const { auth, type } = response;
+    const { auth, user } = response;
     setAuth(auth);
-    setType(type);
+    setUser(user);
   }
 
   async function logout(){
     const response = await authService.logout();
 
-    const { auth, type } = response;
+    const { auth, user } = response;
     setAuth(auth);
-    setType(type);
+    setUser(user);
   }
 
   return (
-    <AuthContext.Provider value={{auth, type, login, logout}}>
+    <AuthContext.Provider value={{auth, user, login, logout}}>
       {children}
     </AuthContext.Provider>
   );

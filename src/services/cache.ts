@@ -33,7 +33,7 @@ class Cache {
     return cpf;
   }
 
-  static async setUser(user: IUserData){
+  static async setUser(user: IUserData | null){
     await this.save('user', JSON.stringify(user));
   }
 

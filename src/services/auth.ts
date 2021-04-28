@@ -39,7 +39,7 @@ export const login = async (cpf: string, password: string): Promise<ILoginData> 
 export const logout = async (): Promise<ILoginData> => {
   const { data }: { data: ILoginPostResponse}  = await api.get('/logout');
 
-  const { token, user } = data;
+  const { auth, token, user } = data;
 
   await Cache.setToken(token);
   await Cache.setUser(user);
@@ -47,8 +47,8 @@ export const logout = async (): Promise<ILoginData> => {
   api.defaults.headers['x-access-token'] = token;
   
   const response: ILoginData = {
-    auth: data.auth,
-    user: data.user
+    auth,
+    user
   }
   return response;
 }
