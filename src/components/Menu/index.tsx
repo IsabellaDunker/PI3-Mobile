@@ -25,12 +25,7 @@ const Menu: React.FC = () => {
       title: 'Comandas',
       icon: 'list-alt',
       page: 'Tab'
-    },
-    {
-      title: 'Pedidos',
-      icon: 'shopping-cart'
-    }
-    
+    },    
   ]
 
   return (
