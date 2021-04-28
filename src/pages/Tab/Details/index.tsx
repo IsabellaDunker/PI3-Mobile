@@ -1,12 +1,20 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useLayoutEffect } from 'react';
 import { View, Text } from 'react-native';
 import HeaderButton from '../../../components/Header/Button';
+import { ITabData } from '../../../interfaces/tab';
 
 import styles from './styles';
 
+interface IParams {
+  tab: ITabData;
+}
+
 const TabDetails: React.FC = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const { tab } = route.params as IParams;
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -18,9 +26,16 @@ const TabDetails: React.FC = () => {
   
   return (
     <View style={styles.container}>
-      <Text>
-        No orders yet
-      </Text>
+      {
+        (tab.orders.length > 0) ? 
+        null :
+        (
+          <Text style={styles.noOrdersFont}>
+            Sem pedidos feitos
+          </Text>
+        )
+      }
+      
     </View>
   );
 }
