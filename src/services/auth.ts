@@ -1,3 +1,4 @@
+import { IUserData } from '../interfaces/user';
 import api from './api';
 import { Cache } from './cache';
 
@@ -5,28 +6,32 @@ import { Cache } from './cache';
 interface ILoginPostResponse {
   auth: boolean;
   token: string;
-  type: string;
+  user: IUserData;
 }
 
 interface ILoginData {
   auth: boolean;
-  type: string | null;
+  user: IUserData | null;
+}
+
+interface IRenewLoginData {
+  auth: boolean;
 }
 
 export const login = async (cpf: string, password: string): Promise<ILoginData> => {
   const { data }: { data: ILoginPostResponse}  = await api.post('/login', { cpf, password });
 
-  const { token, type } = data;
+  const { token, user } = data;
 
   await Cache.setToken(token);
-  await Cache.save('type', type);
+  await Cache.save('user', user);
   await Cache.setCpf(cpf);
 
   api.defaults.headers['x-access-token'] = token;
 
   const response: ILoginData = {
     auth: data.auth,
-    type: data.type
+    user: data.user
   }
   return response;
 }
@@ -34,31 +39,30 @@ export const login = async (cpf: string, password: string): Promise<ILoginData> 
 export const logout = async (): Promise<ILoginData> => {
   const { data }: { data: ILoginPostResponse}  = await api.get('/logout');
 
-  const { token, type } = data;
+  const { token, user } = data;
 
   await Cache.setToken(token);
-  await Cache.save('type', type);
+  await Cache.save('user', user);
   
   api.defaults.headers['x-access-token'] = token;
   
   const response: ILoginData = {
     auth: data.auth,
-    type: data.type
+    user: data.user
   }
   return response;
 }
 
-export const renew = async (): Promise<ILoginData> => {
+export const renew = async (): Promise<IRenewLoginData> => {
   const token = await Cache.getToken();
   
   if(token) {
     api.defaults.headers['x-access-token'] = token;
     const response = await api.get('/renew');
     const { auth } = response.data;
-    const type = await Cache.get('type') as string;
 
-    return { auth, type };
+    return { auth };
   } else {
-    return { auth: false, type: null }
+    return { auth: false }
   }
 }
