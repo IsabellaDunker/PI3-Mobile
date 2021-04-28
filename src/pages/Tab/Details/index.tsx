@@ -29,7 +29,7 @@ const TabDetails: React.FC = () => {
     <View style={styles.container}>
       {
         (tab.orders.length > 0) ? 
-        <OrderList/> :
+        <OrderList orders={tab.orders}/> :
         (
           <Text style={styles.noOrdersFont}>
             Sem pedidos feitos!

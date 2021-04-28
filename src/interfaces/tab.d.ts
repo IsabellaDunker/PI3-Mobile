@@ -1,9 +1,9 @@
+import { IOrderData } from './order.d';
 import { IUserData } from './user.d';
 export interface ITabData {
   id: number;
-  user_id: number;
   is_open: boolean;
-  orders: Object[];
+  orders: IOrderData[];
   user: IUserData;
 }
 

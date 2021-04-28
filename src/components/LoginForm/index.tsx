@@ -7,11 +7,11 @@ import styles from './styles';
 import { Cache } from '../../services/cache';
 import { cpfMask } from '../../utils/masks';
 
-interface IPropsLoginForm {
+interface IProps {
   onSubmit: (cpf: string, password: string) => void;
 }
 
-const LoginForm: React.FC<IPropsLoginForm> = (props) => {
+const LoginForm: React.FC<IProps> = (props) => {
   const { onSubmit } = props;
 
   useEffect(() => {
