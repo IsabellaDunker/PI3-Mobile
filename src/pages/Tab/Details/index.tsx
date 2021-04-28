@@ -2,6 +2,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useLayoutEffect } from 'react';
 import { View, Text } from 'react-native';
 import HeaderButton from '../../../components/Header/Button';
+import OrderList from '../../../components/OrderList';
 import { ITabData } from '../../../interfaces/tab';
 
 import styles from './styles';
@@ -28,10 +29,10 @@ const TabDetails: React.FC = () => {
     <View style={styles.container}>
       {
         (tab.orders.length > 0) ? 
-        null :
+        <OrderList/> :
         (
           <Text style={styles.noOrdersFont}>
-            Sem pedidos feitos
+            Sem pedidos feitos!
           </Text>
         )
       }
