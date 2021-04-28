@@ -4,6 +4,7 @@ import { colors } from '../config/colors';
 
 import TabList from '../pages/Tab/List';
 import TabDetails from '../pages/Tab/Details';
+import OrderDetails from '../pages/Order/Details';
 import { useNavigation } from '@react-navigation/core';
 import { TabProvider } from '../contexts/tab';
 
@@ -46,6 +47,20 @@ const TabRoutes = () => {
           component={TabDetails}
           options={{
             title: 'Comandas',
+            headerStyle: {
+              backgroundColor: colors.button,
+            },
+            headerTitleStyle:{
+              color: colors.font
+            },
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Tab.Screen 
+          name="OrderDetails"
+          component={OrderDetails}
+          options={{
+            title: 'Pedido',
             headerStyle: {
               backgroundColor: colors.button,
             },

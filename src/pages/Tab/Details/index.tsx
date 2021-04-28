@@ -21,7 +21,8 @@ const TabDetails: React.FC = () => {
     navigation.setOptions({
       headerLeft: () => (
         <HeaderButton onPress={() => {navigation.goBack()}} iconName="chevron-left"/>
-      )
+      ),
+      title: 'Pedidos'
     });
   }, [navigation]);
   
