@@ -24,7 +24,7 @@ export const login = async (cpf: string, password: string): Promise<ILoginData> 
   const { token, user } = data;
 
   await Cache.setToken(token);
-  await Cache.save('user', user);
+  await Cache.setUser(user);
   await Cache.setCpf(cpf);
 
   api.defaults.headers['x-access-token'] = token;
@@ -42,7 +42,7 @@ export const logout = async (): Promise<ILoginData> => {
   const { token, user } = data;
 
   await Cache.setToken(token);
-  await Cache.save('user', user);
+  await Cache.setUser(user);
   
   api.defaults.headers['x-access-token'] = token;
   
