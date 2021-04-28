@@ -1,3 +1,4 @@
+import { IUserData } from './../interfaces/user.d';
 import * as SecureStore from 'expo-secure-store';
 
 class Cache {
@@ -30,6 +31,15 @@ class Cache {
   static async getCpf() {
     const cpf = await this.get('cpf');
     return cpf;
+  }
+
+  static async setUser(user: IUserData){
+    await this.save('user', JSON.stringify(user));
+  }
+
+  static async getUser() {
+    const user = await this.get('user');
+    return JSON.parse(user) as IUserData;
   }
 }
 
