@@ -22,6 +22,9 @@ const TabDetails: React.FC = () => {
       headerLeft: () => (
         <HeaderButton onPress={() => {navigation.goBack()}} iconName="chevron-left"/>
       ),
+      headerRight: () => (
+        <HeaderButton onPress={() => {}} iconName="add"/>
+      ),
       title: 'Pedidos'
     });
   }, [navigation]);
