@@ -2,7 +2,7 @@ import { ITabData, ITabCreateData } from '../interfaces/tab';
 import api from './api';
 
 export const get_all = async () => {
-  const response = await api.get('/t');
+  const response = await api.get('/tabs');
 
   return response.data as ITabData[];
 }
