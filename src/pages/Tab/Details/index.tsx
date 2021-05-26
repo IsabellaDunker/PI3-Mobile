@@ -35,13 +35,25 @@ const TabDetails: React.FC = () => {
 
   let text = '';
 
+  let total = 0;
+
+
   tab.orders.forEach((order) => {
-    text += `${getOrderDate(order)}\n`
-    text += `\n`
+    text += `${getOrderDate(order)}\n`;
+    text += `${'========================\n'}`
+    order.products.forEach((product) => {
+      const unitPrice = product.products_ordereds.price / product.products_ordereds.units;
+      text += `${product.name}\n`;
+      text += `${product.products_ordereds.units} x R$${unitPrice}\n`;
+      text += `${'========================\n'}`;
+      total += (product.products_ordereds.price);
+    });
+    text += `\n`;
   });
+  text += `Total: R$${total}`
 
   useLayoutEffect(() => {
-    navigation.setOptions({
+    navigation.setOptions({ 
       headerLeft: () => (
         <HeaderButton onPress={() => {navigation.goBack()}} iconName="chevron-left"/>
       ),

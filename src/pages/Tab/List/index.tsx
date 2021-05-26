@@ -53,24 +53,23 @@ const TabList: React.FC = () => {
           {
             users.map((user, index) => {
               return (
-                <>
-                  <ListItem 
-                    key={'user' + index}
-                    bottomDivider
-                    containerStyle={{ ...styles.itemContainer}}
-                    onPress={async () => {
-                      await tabService.create({ user_id: user.id });
-                      setOverlay(!overlay);
-                      getTabs();
-                    }}
-                  > 
-                    <ListItem.Content>
-                      <ListItem.Title style={styles.itemFont}>{user.name}</ListItem.Title>
-                      <ListItem.Subtitle style={styles.itemFont}>{cpfMask(user.cpf)}</ListItem.Subtitle>
-                    </ListItem.Content>
-                    <ListItem.Chevron color={colors.font} />
-                  </ListItem>
-                </>
+                
+                <ListItem 
+                  key={'user' + index}
+                  bottomDivider
+                  containerStyle={{ ...styles.itemContainer}}
+                  onPress={async () => {
+                    await tabService.create({ user_id: user.id });
+                    setOverlay(!overlay);
+                    getTabs();
+                  }}
+                > 
+                  <ListItem.Content>
+                    <ListItem.Title style={styles.itemFont}>{user.name}</ListItem.Title>
+                    <ListItem.Subtitle style={styles.itemFont}>{cpfMask(user.cpf)}</ListItem.Subtitle>
+                  </ListItem.Content>
+                  <ListItem.Chevron color={colors.font} />
+                </ListItem>
               )
             })
           }
@@ -79,7 +78,7 @@ const TabList: React.FC = () => {
       {
         tabs.map((tab, index) => (
           <ListItem 
-            key={index}
+            key={'tab'+ index}
             bottomDivider
             containerStyle={styles.itemContainer}
             onPress={() => {
