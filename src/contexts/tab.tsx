@@ -5,6 +5,7 @@ import * as tabService from '../services/tab';
 interface ITabContextData {
   tabs: ITabData[];
   getTabs(): Promise<void>;
+  payTab(id: number): Promise<void>;
 }
 
 const TabContext = createContext<ITabContextData>({} as ITabContextData);
@@ -17,12 +18,17 @@ export const TabProvider: React.FC = ({ children }) => {
     setTabs(response);
   }
 
+  async function payTab(id: number){
+    await tabService.pay(id);
+    await getTabs();
+  }
+
   useEffect(() => {
     getTabs();
   }, []);
 
   return (
-    <TabContext.Provider value={{tabs, getTabs}}>
+    <TabContext.Provider value={{tabs, getTabs, payTab}}>
       {children}
     </TabContext.Provider>
   );

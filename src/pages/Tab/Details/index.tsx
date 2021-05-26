@@ -1,8 +1,10 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useLayoutEffect } from 'react';
 import { View, Text, Linking } from 'react-native';
+import { FAB } from 'react-native-elements';
 import HeaderButton from '../../../components/Header/Button';
 import OrderList from '../../../components/OrderList';
+import { useTab } from '../../../contexts/tab';
 import { IOrderData } from '../../../interfaces/order';
 import { ITabData } from '../../../interfaces/tab';
 
@@ -30,6 +32,8 @@ function getOrderDate(order: IOrderData){
 const TabDetails: React.FC = () => {
   const navigation = useNavigation();
   const route = useRoute();
+
+  const { payTab } = useTab();
 
   const { tab, toPay } = route.params as IParams;
 
@@ -83,7 +87,24 @@ const TabDetails: React.FC = () => {
           </Text>
         )
       }
-      
+      {
+        toPay ? 
+        (
+          <FAB
+            placement='right'
+            color="green"
+            icon={{
+              name: "receipt",
+              color: "white"
+            }}
+            onPress={async () => {
+              await payTab(tab.id);
+              navigation.goBack();
+            }}
+          />
+        ): 
+        null
+      }
     </View>
   );
 }

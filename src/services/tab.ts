@@ -18,3 +18,7 @@ export const create = async (tab: ITabCreateData) => {
 
   return response.data as ITabData;
 }
+
+export const pay = async (id: number) => {
+  await api.put(`/tabs/${id}`, {is_open: false});
+}
