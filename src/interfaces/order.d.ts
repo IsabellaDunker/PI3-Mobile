@@ -23,4 +23,5 @@ export interface IOrderData {
   id: number;
   waiter_id: number;
   products: IProductsData[];
+  createdAt: string;
 }
