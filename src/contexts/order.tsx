@@ -1,20 +1,18 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { IOrderData, IProductsOrderedData } from '../interfaces/order';
+import { IProductOnCart } from '../interfaces/order';
 import * as orderService from '../services/order';
 
 interface IOrderContextData {
-  cart: IProductsOrderedData[];
-  orders: IOrderData[];
+  cart: IProductOnCart[];
 }
 
 const OrderContext = createContext<IOrderContextData>({} as IOrderContextData);
 
 export const OrderProvider: React.FC = ({ children }) => {
-  const [ cart, setCart ] = useState<IProductsOrderedData[]>([]);
-  const [ orders, setOrders ] = useState<IOrderData[]>([]);
+  const [ cart, setCart ] = useState<IProductOnCart[]>([]);
 
   return (
-    <OrderContext.Provider value={{cart, orders}}>
+    <OrderContext.Provider value={{cart}}>
       {children}
     </OrderContext.Provider>
   );

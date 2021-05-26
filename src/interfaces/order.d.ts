@@ -25,3 +25,10 @@ export interface IOrderData {
   products: IProductsData[];
   createdAt: string;
 }
+
+export interface IProductOnCart {
+  id: number;
+  name: string;
+  units: number;
+  price: number;
+}
