@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-import { Icon, ListItem, Overlay } from 'react-native-elements';
+import { Button, Icon, ListItem, Overlay } from 'react-native-elements';
 import HeaderButton from '../../../components/Header/Button';
 import { colors } from '../../../config/colors';
 import { useTab } from '../../../contexts/tab';
@@ -53,22 +53,24 @@ const TabList: React.FC = () => {
           {
             users.map((user, index) => {
               return (
-                <ListItem 
-                  key={index}
-                  bottomDivider
-                  containerStyle={{ ...styles.itemContainer}}
-                  onPress={async () => {
-                    await tabService.create({ user_id: user.id });
-                    setOverlay(!overlay);
-                    getTabs();
-                  }}
-                > 
-                  <ListItem.Content>
-                    <ListItem.Title style={styles.itemFont}>{user.name}</ListItem.Title>
-                    <ListItem.Subtitle style={styles.itemFont}>{cpfMask(user.cpf)}</ListItem.Subtitle>
-                  </ListItem.Content>
-                  <ListItem.Chevron color={colors.font} />
-                </ListItem>
+                <>
+                  <ListItem 
+                    key={'user' + index}
+                    bottomDivider
+                    containerStyle={{ ...styles.itemContainer}}
+                    onPress={async () => {
+                      await tabService.create({ user_id: user.id });
+                      setOverlay(!overlay);
+                      getTabs();
+                    }}
+                  > 
+                    <ListItem.Content>
+                      <ListItem.Title style={styles.itemFont}>{user.name}</ListItem.Title>
+                      <ListItem.Subtitle style={styles.itemFont}>{cpfMask(user.cpf)}</ListItem.Subtitle>
+                    </ListItem.Content>
+                    <ListItem.Chevron color={colors.font} />
+                  </ListItem>
+                </>
               )
             })
           }
@@ -81,7 +83,7 @@ const TabList: React.FC = () => {
             bottomDivider
             containerStyle={styles.itemContainer}
             onPress={() => {
-              navigation.navigate('TabDetails', {tab})
+              navigation.navigate('TabDetails', {tab, toPay: false})
             }}
           > 
             <View>
@@ -94,7 +96,29 @@ const TabList: React.FC = () => {
               <ListItem.Title style={styles.itemFont}>{tab.user.name}</ListItem.Title>
               <ListItem.Subtitle style={styles.itemFont}>{cpfMask(tab.user.cpf)}</ListItem.Subtitle>
             </ListItem.Content>
-            <ListItem.Chevron color={colors.font} />
+            <Button 
+              key={'orders'+index}
+              disabled
+              disabledStyle={{backgroundColor: colors.background}}
+              buttonStyle={{backgroundColor: colors.background}}
+              icon={{
+                name: "receipt",
+                size: 15,
+                color: "white"
+              }}
+            />
+            <Button 
+              key={'payment'+index}
+              buttonStyle={{backgroundColor: 'green'}}
+              icon={{
+                name: "credit-card",
+                size: 15,
+                color: "white"
+              }}
+              onPress={() => {
+                navigation.navigate('TabDetails', {tab, toPay: true})
+              }}
+            />
           </ListItem>
         ))
       }
