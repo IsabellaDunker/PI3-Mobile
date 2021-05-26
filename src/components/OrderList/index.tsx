@@ -12,11 +12,19 @@ interface IProps {
 }
 
 function getOrderData(order: IOrderData){
-  const { products, id } = order;
+  const { products, id, createdAt } = order;
 
   const price = products.reduce((prev, curr)=>(prev + curr.products_ordereds.price), 0)
 
-  return { price, id };
+  const day = order.createdAt.slice(8, 10);
+  const month = order.createdAt.slice(5, 7);
+  const year = order.createdAt.slice(0, 4);
+  const date = `${day}/${month}/${year}`;
+  const hour = order.createdAt.slice(11, 13);
+  const minute = order.createdAt.slice(14, 16);
+  const time = `${hour}:${minute}`;
+
+  return { price, id, datetime: `${date} - ${time}` };
 }
 
 const OrderList: React.FC<IProps> = (props) => {
@@ -45,7 +53,7 @@ const OrderList: React.FC<IProps> = (props) => {
                 />
               </View>
               <ListItem.Content>
-                <ListItem.Title style={styles.itemFont}>Data a ser adicionada</ListItem.Title>
+                <ListItem.Title style={styles.itemFont}>{orderData.datetime}</ListItem.Title>
                 <ListItem.Subtitle style={styles.itemFont}>R${orderData.price}</ListItem.Subtitle>
               </ListItem.Content>
               <ListItem.Chevron color={colors.font} />
