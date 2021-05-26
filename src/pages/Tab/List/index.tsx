@@ -49,6 +49,7 @@ const TabList: React.FC = () => {
       isVisible={overlay} 
       onBackdropPress={() => {setOverlay(!overlay)}}>
         <>
+          <Text style={styles.itemFont}>Selecione o cliente</Text>
           {
             users.map((user, index) => {
               return (

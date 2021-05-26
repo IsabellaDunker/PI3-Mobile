@@ -5,6 +5,7 @@ import { colors } from '../config/colors';
 import TabList from '../pages/Tab/List';
 import TabDetails from '../pages/Tab/Details';
 import OrderDetails from '../pages/Order/Details';
+import OrderRoutes from './order.routes';
 import { useNavigation } from '@react-navigation/core';
 import { TabProvider } from '../contexts/tab';
 
@@ -70,6 +71,21 @@ const TabRoutes = () => {
             headerTitleAlign: 'center',
           }}
         />
+        <Tab.Screen 
+          name="Order"
+          component={OrderRoutes}
+          options={{
+            title: 'Pedido',
+            headerStyle: {
+              backgroundColor: colors.button,
+            },
+            headerTitleStyle:{
+              color: colors.font
+            },
+            headerTitleAlign: 'center',
+          }}
+        />
+        
       </Tab.Navigator>      
     </TabProvider>
   );
